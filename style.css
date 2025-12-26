@@ -1,0 +1,158 @@
+
+html,body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    background:black;
+    user-select:none;
+    height:100%;
+}
+
+/* Fade-in effect */
+body.fade {
+    opacity: 0;
+    transition: opacity 2s ease-out;
+}
+body.fade.show {
+    opacity: 1;
+}
+
+canvas{position:fixed; inset:0;}
+#bg{z-index:0;}
+#fx{z-index:10;}
+
+#text{
+    font-family:'Dancing Script',cursive;
+    position:absolute;
+    top:-200px;
+    width:100%;
+    text-align:center;
+    font-size:clamp(3em,6vw,5em);
+    background:linear-gradient(120deg,#b8860b,#fff4b0,#ffd700,#fff4b0,#b8860b);
+    background-size:200% auto;
+    color:transparent;
+    -webkit-background-clip:text;
+    background-clip:text;
+    animation:drop 4s ease-out forwards, shimmer 3s linear infinite;
+    text-shadow:0 0 12px rgba(255,215,0,.5);
+    z-index:5;
+    transition: transform 0.15s ease-out;
+}
+#text.beat {
+    transform: translateY(-10px);
+}
+
+@keyframes drop{
+    0%{top:-200px;}
+    70%{top:26%;}
+    85%{top:23%;}
+    100%{top:26%;}
+}
+@keyframes shimmer{
+    from{background-position:0%;}
+    to{background-position:200%;}
+}
+
+#credits{
+    font-family:'Dancing Script',cursive;
+    font-size:2.2em;
+    color:#d0d0d0;
+    position:absolute;
+    top:40%;
+    right:40px;
+    z-index:5;
+    transform: translateX(-200%);
+    opacity: 0;
+    transition: transform 2.5s ease-out, opacity 2s ease-out;
+}
+#credits.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Countdown rechtsonder */
+#countdown{
+    font-family:'Roboto',sans-serif;
+    font-weight:700;
+    color:white;
+    position:absolute;
+    right:30px;
+    bottom:30px;
+    text-align:right;
+    font-size:1.4em;
+    z-index:5;
+}
+
+#startOverlay{
+    font-family:'Roboto',sans-serif;
+    font-size:.9em;
+    color:white;
+    position:absolute;
+    width:100%;
+    top:52%;
+    text-align:center;
+    cursor:pointer;
+    z-index:999;
+}
+
+/* Santa */
+#santa{
+    position:absolute;
+    width:180px;
+    z-index:6;
+    pointer-events:none;
+    transform-origin:center bottom;
+    filter:drop-shadow(0 6px 8px rgba(0,0,0,.6));
+}
+
+/* Disco effect */
+#santa.disco{
+    filter:drop-shadow(0 0 20px gold) brightness(1.6);
+}
+
+/* Knoppen */
+#partyBtn,
+#outroBtn{
+    position:absolute;
+    top:10px;
+    padding:8px 12px;
+    font-family:'Roboto',sans-serif;
+    font-size:.85em;
+    color:white;
+    background:rgba(0,0,0,0.6);
+    border:1px solid white;
+    cursor:pointer;
+    z-index:999;
+}
+#partyBtn{ right:10px; }
+#outroBtn{ left:10px; }
+
+#partyBtn.on{
+    background:rgba(255,215,0,0.2);
+    border-color:#ffd700;
+    color:#ffd700;
+}
+
+/* Fade overlay (gold/white) */
+#fadeOverlay{
+    position:fixed;
+    inset:0;
+    background: white;
+    opacity:0;
+    pointer-events:none;
+    z-index:9998;
+    transition: opacity 2s ease-out;
+}
+
+/* Camera shake */
+@keyframes shake {
+    0% { transform: translate(0,0); }
+    20% { transform: translate(-10px, 8px); }
+    40% { transform: translate(12px, -6px); }
+    60% { transform: translate(-8px, 10px); }
+    80% { transform: translate(6px, -8px); }
+    100% { transform: translate(0,0); }
+}
+.shake {
+    animation: shake 0.6s ease-out;
+}
