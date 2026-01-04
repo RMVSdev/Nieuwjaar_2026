@@ -1,158 +1,167 @@
-
-html,body{
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    background:black;
-    user-select:none;
-    height:100%;
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: black;
+    height: 100%;
+    font-family: 'Dancing Script', cursive;
 }
 
-/* Fade-in effect */
-body.fade {
+/* Canvas layers */
+canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+/* Text */
+#text {
+    position: fixed;
+    top: 28%;
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    color: gold;
     opacity: 0;
-    transition: opacity 2s ease-out;
-}
-body.fade.show {
-    opacity: 1;
-}
-
-canvas{position:fixed; inset:0;}
-#bg{z-index:0;}
-#fx{z-index:10;}
-
-#text{
-    font-family:'Dancing Script',cursive;
-    position:absolute;
-    top:-200px;
-    width:100%;
-    text-align:center;
-    font-size:clamp(3em,6vw,5em);
-    background:linear-gradient(120deg,#b8860b,#fff4b0,#ffd700,#fff4b0,#b8860b);
-    background-size:200% auto;
-    color:transparent;
-    -webkit-background-clip:text;
-    background-clip:text;
-    animation:drop 4s ease-out forwards, shimmer 3s linear infinite;
-    text-shadow:0 0 12px rgba(255,215,0,.5);
-    z-index:5;
-    transition: transform 0.15s ease-out;
-}
-#text.beat {
-    transform: translateY(-10px);
+    transition: opacity 1.2s ease;
+    z-index: 2000;  /* hoger dan alle canvassen */
+    pointer-events: none;
+    transform-origin: center center;
 }
 
-@keyframes drop{
-    0%{top:-200px;}
-    70%{top:26%;}
-    85%{top:23%;}
-    100%{top:26%;}
-}
-@keyframes shimmer{
-    from{background-position:0%;}
-    to{background-position:200%;}
-}
-
-#credits{
-    font-family:'Dancing Script',cursive;
-    font-size:2.2em;
-    color:#d0d0d0;
-    position:absolute;
-    top:40%;
-    right:40px;
-    z-index:5;
-    transform: translateX(-200%);
+#credits {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translateX(120vw);
     opacity: 0;
-    transition: transform 2.5s ease-out, opacity 2s ease-out;
+    font-size: 3em;
+    color: #e6f2ff;
+   filter:
+        drop-shadow(0 0 22px rgba(120,180,255,0.9))
+        drop-shadow(0 0 48px rgba(120,180,255,0.4));
+
+    transition: transform 3.2s cubic-bezier(0.16,1,0.3,1),
+                opacity 2.2s ease;
+    z-index: 1000;
+    pointer-events: none;
 }
+
 #credits.show {
-    transform: translateX(0);
     opacity: 1;
+    transform: translateX(-50%);
 }
 
-/* Countdown rechtsonder */
-#countdown{
-    font-family:'Roboto',sans-serif;
-    font-weight:700;
-    color:white;
-    position:absolute;
-    right:30px;
-    bottom:30px;
-    text-align:right;
-    font-size:1.4em;
-    z-index:5;
+
+/* Overlay 
+#startOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    cursor: pointer;
+
+}
+*/
+
+
+/* test */
+#startOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: block;
+    background: rgba(255,0,0,0.15); /* TEST: rood */
+
+    pointer-events: auto;
+    cursor: pointer;
+}
+/* einde test */
+
+
+
+
+
+
+
+
+#startOverlay.active {
+    display: block;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), rgba(0,0,0,0.5));
 }
 
-#startOverlay{
-    font-family:'Roboto',sans-serif;
-    font-size:.9em;
-    color:white;
-    position:absolute;
-    width:100%;
-    top:52%;
-    text-align:center;
-    cursor:pointer;
-    z-index:999;
+#countdown {
+    position: fixed;
+    left: 50%;
+    top: 20%;       /*  45 = subtiel, 42 = show-gevoel, 40 = agressief*/
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    pointer-events: none;
 }
 
-/* Santa */
-#santa{
-    position:absolute;
-    width:180px;
-    z-index:6;
-    pointer-events:none;
-    transform-origin:center bottom;
-    filter:drop-shadow(0 6px 8px rgba(0,0,0,.6));
+#countdownInner {
+    display: inline-block;
+    text-align: center;
+    transform-origin: 50% 50%;
+    will-change: transform;
+
+    font-family: 'Arial Black', 'Arial', sans-serif;
+    font-weight: 900;
+    font-size: clamp(100px, 20vw, 280px);
+    letter-spacing: 0.04em;
+
+
 }
 
-/* Disco effect */
-#santa.disco{
-    filter:drop-shadow(0 0 20px gold) brightness(1.6);
-}
 
-/* Knoppen */
-#partyBtn,
-#outroBtn{
-    position:absolute;
-    top:10px;
-    padding:8px 12px;
-    font-family:'Roboto',sans-serif;
-    font-size:.85em;
-    color:white;
-    background:rgba(0,0,0,0.6);
-    border:1px solid white;
-    cursor:pointer;
-    z-index:999;
-}
-#partyBtn{ right:10px; }
-#outroBtn{ left:10px; }
 
-#partyBtn.on{
-    background:rgba(255,215,0,0.2);
-    border-color:#ffd700;
-    color:#ffd700;
-}
 
-/* Fade overlay (gold/white) */
-#fadeOverlay{
-    position:fixed;
-    inset:0;
-    background: white;
-    opacity:0;
-    pointer-events:none;
-    z-index:9998;
-    transition: opacity 2s ease-out;
-}
-
-/* Camera shake */
-@keyframes shake {
-    0% { transform: translate(0,0); }
-    20% { transform: translate(-10px, 8px); }
-    40% { transform: translate(12px, -6px); }
-    60% { transform: translate(-8px, 10px); }
-    80% { transform: translate(6px, -8px); }
+@keyframes camShake {
+    0%   { transform: translate(0,0); }
+    20%  { transform: translate(-12px, 8px); }
+    40%  { transform: translate(10px, -6px); }
+    60%  { transform: translate(-8px, 10px); }
+    80%  { transform: translate(6px, -10px); }
     100% { transform: translate(0,0); }
 }
+
 .shake {
-    animation: shake 0.6s ease-out;
+    animation: camShake 0.6s ease;
 }
+
+
+@keyframes newYearZoom {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+}
+
+
+#text.newyear {
+    font-size: clamp(4em, 8vw, 7em);
+    animation: newYearZoom 6s ease-out forwards;
+}
+
+@keyframes textBreathe {
+    0%   { transform: scale(1);   }
+    50%  { transform: scale(1.03);}
+    100% { transform: scale(1);   }
+}
+
+#text.breathe {
+    animation: textBreathe 6s ease-in-out infinite;
+}
+
+
+

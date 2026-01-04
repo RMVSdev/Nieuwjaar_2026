@@ -4,74 +4,47 @@
 <meta charset="UTF-8">
 <title>Nieuwjaarsshow</title>
 
-<!-- Favicon -->
-<link rel="icon" href="favicon.png" type="image/png">
+<link rel="icon" href="assets/favicon.png" type="image/png">
 
-<!-- Open Graph (voor Facebook, Discord, etc.) -->
 <meta property="og:title" content="Nieuwjaar 2026 – Interactieve Feestshow">
-<meta property="og:description" content="Dansende Santa, vuurwerk, sneeuwstorm, party-mode en een spectaculaire Nieuwjaars-finale.">
+<meta property="og:description" content="Dansende Santa, sneeuw, party-mode en een spectaculaire finale.">
 <meta property="og:image" content="https://rmvsdev.github.io/Nieuwjaar_2026/preview.png">
 <meta property="og:url" content="https://rmvsdev.github.io/Nieuwjaar_2026/">
 <meta property="og:type" content="website">
 
-<!-- Twitter / X preview -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nieuwjaar 2026 – Interactieve Feestshow">
-<meta name="twitter:description" content="Dansende Santa, vuurwerk, sneeuwstorm, party-mode en een spectaculaire Nieuwjaars-finale.">
-<meta name="twitter:image" content="https://rmvsdev.github.io/Nieuwjaar_2026/preview.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
 
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="fade">
+<body>
 
-<div id="devMode">Developer Mode</div>
-
-<div id="fadeOverlay"></div>
-
-<div id="text">Zalige Kerst<br>en een Gelukkig Nieuw Jaar</div>
-<div id="credits">vanwege Rudy</div>
-<div id="countdown"></div>
-<div id="startOverlay">✨ Klik of tik om de show te starten ✨</div>
-
-<button id="outroBtn">Outro</button>
-<button id="partyBtn">Party mode: OFF</button>
-
-<img id="santa" src="assets/santa.png">
-
+<!-- Canvas lagen -->
 <canvas id="bg"></canvas>
 <canvas id="fx"></canvas>
+<canvas id="creditsTrail"></canvas>
 
+<!-- Tekst & credits -->
+<div id="text"></div>
+<div id="credits"></div>
+
+<!-- Overlay -->
+<div id="startOverlay"></div>
+
+<!-- Countdown -->
+<div id="countdown">
+    <div id="countdownInner"></div>
+</div>
+
+
+
+<!-- Audio -->
 <audio id="music" src="assets/music.mp3" loop></audio>
 <audio id="boom" src="assets/boom.mp3"></audio>
-<audio id="bell" src="assets/bell.mp3"></audio>
+<audio id="finaleboom" src="assets/finaleboom.mp3"></audio>
+<audio id="bassboom" src="assets/bassboom.mp3"></audio>
 
-<script src="script.js"></script>
+<script src="script.js" defer ></script>
 </body>
 </html>
