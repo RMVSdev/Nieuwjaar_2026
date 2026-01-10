@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Nieuwjaarsshow</title>
 
-<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="icon" href="assets/favicon.ico" type="image/png">
 
 <meta property="og:title" content="Nieuwjaar 2026 – Interactieve Feestshow">
 <meta property="og:description" content="Dansende Santa, sneeuw, party-mode en een spectaculaire finale.">
@@ -39,12 +39,28 @@
 
 
 
+
 <!-- Audio -->
 <audio id="music" src="assets/music.mp3" loop></audio>
 <audio id="boom" src="assets/boom.mp3"></audio>
 <audio id="finaleboom" src="assets/finaleboom.mp3"></audio>
 <audio id="bassboom" src="assets/bassboom.mp3"></audio>
+<audio id="cheering" src="assets/cheering.mp3"></audio>
 
 <script src="script.js" defer ></script>
+
+<!-- Voeg toe vlak voor de closing </body> tag 
+<div id="replayButton" class="hidden">
+    <button onclick="restartShow()">Opnieuw afspelen</button>
+    </button>   
+-->
+<!-- <button onclick="restartShow()" aria-label="Speel de nieuwjaarsshow opnieuw af">Opnieuw afspelen -->
+
+  <!-- Zorg dat dit AAN HET EINDE van de body staat, na alle andere elementen -->
+<div id="replayButton">
+    <button onclick="restartShow()">Opnieuw afspelen</button>
+</div>  
+    
+</div>
 </body>
 </html>

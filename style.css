@@ -14,7 +14,13 @@ canvas {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
+     transition: filter 0.5s ease;
 }
+
+#bg.party-mode {
+    filter: brightness(1.1) contrast(1.1);
+}
+
 
 /* Text */
 #text {
@@ -31,6 +37,9 @@ canvas {
     transform-origin: center center;
 }
 
+
+
+/*
 #credits {
     position: fixed;
     top: 40%;
@@ -48,23 +57,51 @@ canvas {
     z-index: 1000;
     pointer-events: none;
 }
+*/
+
+/* Credits soepel laten invliegen */
+/* Volledig herziene Credits CSS voor Fly-in */
+#credits {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    /* Startpositie: ver buiten beeld aan de rechterkant */
+    transform: translate(100vw, -50%) skewX(-20deg);
+    opacity: 0;
+    font-size: 4em;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px gold;
+    z-index: 2500;
+    filter: blur(10px);
+    transition: none; /* Geen transitie bij reset */
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Inkomende staat: naar het midden */
+#credits.enter {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate(-50%, -50%) scale(1);
+    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Elastische binnenkomst */
+}
+
+/* Uitgaande staat: naar links wegvliegen */
+#credits.exit {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translate(-150%, -50%) skewX(20deg);
+    transition: all 1s ease-in;
+}
 
 #credits.show {
     opacity: 1;
     transform: translateX(-50%);
 }
 
+/* einde credits soepel laten invliegen
 
-/* Overlay 
-#startOverlay {
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    display: none;
-    cursor: pointer;
 
-}
-*/
 
 
 /* test */
@@ -164,4 +201,110 @@ canvas {
 }
 
 
+/* Alles over replay-button ************************ */
+/* Replay Button Styles - Subtiele versie */
+/* REPLAY BUTTON - Zorg dat hij altijd zichtbaar kan zijn */
+#replayButton {
+    position: fixed !important;
+    bottom: 40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 99999 !important; /* EXTRA HOOG */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 1.5s ease !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: 30px !important;
+    padding: 12px 24px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+#replayButton.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    transform: translateX(-50%) scale(1.05) !important;
+}
+
+#replayButton button {
+    background: transparent !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px 30px !important;
+    font-size: 1.2em !important;
+    font-family: 'Arial', sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    letter-spacing: 1px !important;
+    min-width: 200px !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+#replayButton button:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Pulse animatie */
+@keyframes buttonPulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        transform: translateX(-50%) scale(1.08);
+        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+#replayButton button:active {
+    transform: translateY(0);
+}
+
+/* Donkere versie voor contrast */
+@media (prefers-color-scheme: light) {
+    #replayButton {
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    
+    #replayButton button {
+        color: rgba(0, 0, 0, 0.8);
+    }
+    
+    #replayButton button:hover {
+        background: rgba(0, 0, 0, 0.1);
+        color: black;
+    }
+}
+
+/* Voor mobile responsiveness */
+@media (max-width: 768px) {
+    #replayButton {
+        bottom: 20px;
+        padding: 8px 16px;
+    }
+    
+    #replayButton button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        min-width: 160px;
+    }
+}
 
